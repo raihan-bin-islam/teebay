@@ -1,0 +1,14 @@
+type User {
+  id: Int!
+  firstName: String!
+  lastName: String!
+  address: String
+  phone: String
+  email: String!
+  password: String!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
