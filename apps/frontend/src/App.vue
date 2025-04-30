@@ -1,26 +1,28 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { Toaster } from 'vue-sonner'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <Toaster :rich-colors="true" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <main class="w-svw h-svh overflow-hidden flex flex-col">
+    <header class="bg-accent p-4">
+      <div class="mx-auto max-w-6xl">
+        <nav class="mx-auto flex items-center justify-center gap-4 w-fit">
+          <RouterLink to="/" class="hover:text-sky-600 font-medium">Home</RouterLink>
+          <RouterLink to="/login" class="hover:text-sky-600 font-medium">Login</RouterLink>
+          <RouterLink to="/register" class="hover:text-sky-600 font-medium">Register</RouterLink>
+        </nav>
+      </div>
+    </header>
+    <div class="grow">
+      <RouterView />
     </div>
-  </header>
-
-  <RouterView />
+  </main>
 </template>
 
-<style scoped>
+<!-- <style scoped>
 header {
   line-height: 1.5;
   max-height: 100vh;
@@ -82,4 +84,4 @@ nav a:first-of-type {
     margin-top: 1rem;
   }
 }
-</style>
+</style> -->
