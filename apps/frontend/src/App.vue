@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import { Toaster } from 'vue-sonner'
+import { Button } from './components/ui/button'
+import { useAuth } from './composables/useAuth'
+const { isAuthenticated, logout } = useAuth()
 </script>
 
 <template>
@@ -9,14 +12,34 @@ import { Toaster } from 'vue-sonner'
   <main class="w-svw h-svh overflow-hidden flex flex-col">
     <header class="bg-accent p-4">
       <div class="mx-auto max-w-6xl">
-        <nav class="mx-auto flex items-center justify-center gap-4 w-fit">
-          <RouterLink to="/" class="hover:text-sky-600 font-medium">Home</RouterLink>
-          <RouterLink to="/login" class="hover:text-sky-600 font-medium">Login</RouterLink>
-          <RouterLink to="/register" class="hover:text-sky-600 font-medium">Register</RouterLink>
+        <nav class="flex items-center justify-between mx-auto">
+          <div
+            :class="{
+              'mx-auto pl-40 flex items-center justify-center gap-4 w-fit': true,
+              'pl-20': isAuthenticated(),
+            }"
+          >
+            <RouterLink to="/" class="hover:text-sky-600 font-medium">Home</RouterLink>
+            <RouterLink to="/products" class="hover:text-sky-600 font-medium">Products</RouterLink>
+            <RouterLink to="/transaction-history" class="hover:text-sky-600 font-medium"
+              >Transaction History</RouterLink
+            >
+          </div>
+          <div class="flex items-center gap-2.5">
+            <Button v-if="!isAuthenticated()" :as-child="true">
+              <RouterLink to="/login" class="hover:text-sky-600 font-medium">Login</RouterLink>
+            </Button>
+            <Button v-if="!isAuthenticated()" :as-child="true">
+              <RouterLink to="/register" class="hover:text-sky-600 font-medium"
+                >Register</RouterLink
+              >
+            </Button>
+          </div>
+          <Button v-if="isAuthenticated()" @click="logout">Logout</Button>
         </nav>
       </div>
     </header>
-    <div class="grow">
+    <div class="grow max-w-6xl mx-auto w-full">
       <RouterView />
     </div>
   </main>
