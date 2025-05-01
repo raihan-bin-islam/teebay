@@ -1,42 +1,214 @@
-# Turborepo starter with shell commands
+# TeeBay
 
-This Turborepo starter is maintained by the Turborepo core team. This template is great for issue reproductions and exploring building task graphs without frameworks.
+A full-stack application for buying, selling, and renting products. TeeBay provides a platform where users can list their products, buy products from others, or rent items for a specific period.
 
-## Using this example
+## Project Overview
 
-Run the following command:
+TeeBay is built using a modern tech stack with a Vue 3 frontend and a Node.js/Express/GraphQL backend. The application uses a PostgreSQL database for data storage and is structured as a monorepo using Turborepo for efficient build and development workflows.
 
-```sh
-npx create-turbo@latest -e with-shell-commands
+## Features
+
+### User Authentication
+
+- User registration with personal details (name, address, email, etc.)
+- Protected routes for authenticated users
+
+### Product Management
+
+- Create new product listings with details (title, description, price, etc.)
+- Set products for sale or rent with custom rental periods and prices
+- Categorize products for better organization
+- Update or delete your product listings
+- View product details including owner information
+
+### Buying and Selling
+
+- Browse all available products
+- Purchase products from other users
+- Track your bought and sold products
+
+### Rental System
+
+- Rent products for specific date ranges
+- Lend your products to other users
+- Track your borrowed and lent products
+
+### Transaction History
+
+- View comprehensive transaction history
+- Track all your buying, selling, borrowing, and lending activities
+
+## Tech Stack
+
+### Frontend
+
+- Vue 3 with Composition API
+- Vue Router for navigation
+- Tailwind CSS for styling
+- shadcn-vue component library for faster development
+- Vue Sonner for toast notifications
+
+### Backend
+
+- Node.js with Express
+- Apollo Server for GraphQL API
+- Prisma as ORM for database operations
+
+### Database
+
+- PostgreSQL
+
+### DevOps
+
+- Docker and Docker Compose for containerization
+- Turborepo for monorepo management
+
+## Project Structure
+
+```
+teebay/
+├── apps/
+│   ├── backend/         # GraphQL API server
+│   │   ├── prisma/      # Database schema and migrations
+│   │   └── src/         # Backend source code
+│   └── frontend/        # Vue 3 application
+│       └── src/         # Frontend source code
+├── docker-compose.yml   # Docker configuration for database setup
+└── package.json         # Root package.json for monorepo
 ```
 
-### For bug reproductions
+## Getting Started
 
-Giving the Turborepo core team a minimal reproduction is the best way to create a tight feedback loop for a bug you'd like to report.
+### Prerequisites
 
-Because most monorepos will rely on more tooling than Turborepo (frameworks, linters, formatters, etc.), it's often useful for us to have a reproduction that strips away all of this other tooling so we can focus _only_ on Turborepo's role in your repo. This example does exactly that, giving you a good starting point for creating a reproduction.
+- Node.js (v14 or higher)
+- Yarn package manager
+- Docker and Docker Compose (for running PostgreSQL)
 
-- Feel free to rename/delete packages for your reproduction so that you can be confident it most closely matches your use case.
-- If you need to use a different package manager to produce your bug, run `npx @turbo/workspaces convert` to switch package managers.
-- It's possible that your bug really **does** have to do with the interaction of Turborepo and other tooling within your repository. If you find that your bug does not reproduce in this minimal example and you're confident Turborepo is still at fault, feel free to bring that other tooling into your reproduction.
+### Installation
 
-## What's inside?
+1. Clone the repository
 
-This Turborepo includes the following packages:
+```sh
+git clone https://github.com/raihan-bin-islam/teebay.git
+cd teebay
+```
 
-### Apps and Packages
+2. Install dependencies
 
-- `app-a`: A final package that depends on all other packages in the graph and has no dependents. This could resemble an application in your monorepo that consumes everything in your monorepo through its topological tree.
-- `app-b`: Another final package with many dependencies. No dependents, lots of dependencies.
-- `pkg-a`: A package that has all scripts in the root `package.json`.
-- `pkg-b`: A package with _almost_ all scripts in the root `package.json`.
-- `tooling-config`: A package to simulate a common configuration used for all of your repository. This could resemble a configuration for tools like TypeScript or ESLint that are installed into all of your packages.
+```sh
+yarn
+```
 
-### Some scripts to try
+3. Initialize the database
 
-If you haven't yet, [install global `turbo`](https://turborepo.com/docs/installing#install-globally) to run tasks.
+```sh
+docker-compose up -d
+```
 
-- `turbo build lint check-types`: Runs all tasks in the default graph.
-- `turbo build`: A basic command to build `app-a` and `app-b` in parallel.
-- `turbo build --filter=app-a`: Building only `app-a` and its dependencies.
-- `turbo lint`: A basic command for running lints in all packages in parallel.
+4. Set up environment variables
+
+Create `.env` files in both the backend for database connection
+
+```sh
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/teebay?schema=public"
+```
+
+5. Generate prisma client
+
+```sh
+cd apps/backend
+yarn prisma:generate
+```
+
+6. Run Migrations & seeds
+
+```sh
+yarn prisma:migrate
+yarn prisma:seed
+```
+
+7. Start the development servers
+
+```sh
+yarn dev
+```
+
+This will start both the frontend and backend development servers.
+
+### Building for Production
+
+```sh
+yarn build
+```
+
+## Database Administration
+
+The project includes Adminer for database management, accessible at http://localhost:8080 when the Docker containers are running.
+
+- System: PostgreSQL
+- Server: db
+- Username: postgres
+- Password: postgres
+- Database: teebay
+
+## API Documentation
+
+The GraphQL API provides the following main operations:
+
+### Queries
+
+- `users`: Get all users
+- `products`: Get all products
+- `myProducts`: Get products owned by the current user
+- `product(id)`: Get a specific product by ID
+- `myBoughtProducts`: Get products bought by the current user
+- `mySoldProducts`: Get products sold by the current user
+- `myBorrowedProducts`: Get products borrowed by the current user
+- `myLentProducts`: Get products lent by the current user
+- `transactions`: Get all transactions
+
+### Mutations
+
+- `register`: Create a new user account
+- `login`: Authenticate a user
+- `createProduct`: Create a new product listing
+- `updateProduct`: Update an existing product
+- `deleteProduct`: Delete a product
+- `buyProduct`: Purchase a product
+- `rentProduct`: Rent a product for a specific period
+
+## Development Prompts
+
+The following ChatGPT prompts were used during the development of this project to assist with various aspects of implementation:
+
+### Architecture and Setup
+
+- "Design a full-stack application for buying, selling, and renting products using Vue 3, Node.js, GraphQL, and PostgreSQL"
+- "Create a monorepo structure using Turborepo for a Vue and Node.js application"
+- "Set up a PostgreSQL database with Docker for a product marketplace application"
+
+### Frontend Development
+
+- "Design a responsive UI for a product marketplace using Vue 3 and Tailwind CSS"
+- "Implement user authentication flows in Vue 3 with GraphQL"
+- "Create reusable components for product listings in Vue 3"
+- "Implement form validation for product creation and user registration"
+
+### Backend Development
+
+- "Design a GraphQL schema for a product marketplace with buying, selling, and rental features"
+- "Implement Prisma models for users, products, and transactions"
+- "Create GraphQL resolvers for product buying and rental functionality"
+- "Implement authentication middleware"
+
+### Data Entry
+
+Help me create some products with title, description, categories within the following categories:
+
+- ELECTRONICS
+- FURNITURE
+- HOME_APPLIANCES
+- SPORTING_GOODS
+- OUTDOOR
+- TOYS
