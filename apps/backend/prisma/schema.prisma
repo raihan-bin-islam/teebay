@@ -15,6 +15,62 @@ model User {
   phone      String?
   email      String  @unique
   password   String
- 
+  products       Product[]     @relation("UserProducts")
+  boughtProducts Transaction[] @relation("BuyerTransactions")
+  soldProducts   Transaction[] @relation("SellerTransactions")
+  rentedProducts Rental[]      @relation("RenterRentals")
+  lentProducts   Rental[]      @relation("OwnerRentals")
 }
 
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  products Product[] @relation("ProductCategories")
+}
+
+model Product {
+  id          Int           @id @default(autoincrement())
+  title       String
+  description String
+  price       Float
+  rentPrice   Float?
+  rentPeriod  String?
+  status      ProductStatus @default(AVAILABLE)
+  owner       User          @relation("UserProducts", fields: [ownerId], references: [id])
+  ownerId     Int
+  categories  Category[]    @relation("ProductCategories")
+  transactions Transaction[] @relation("ProductTransactions")
+  rentals     Rental[]      @relation("ProductRentals")
+  views       Int           @default(0)
+}
+
+model Transaction {
+  id        Int      @id @default(autoincrement())
+  product   Product  @relation("ProductTransactions", fields: [productId], references: [id])
+  productId Int
+  buyer     User     @relation("BuyerTransactions", fields: [buyerId], references: [id])
+  buyerId   Int
+  seller    User     @relation("SellerTransactions", fields: [sellerId], references: [id])
+  sellerId  Int
+  createdAt DateTime @default(now())
+}
+
+model Rental {
+  id        Int      @id @default(autoincrement())
+  product   Product  @relation("ProductRentals", fields: [productId], references: [id])
+  productId Int
+  renter    User     @relation("RenterRentals", fields: [renterId], references: [id])
+  renterId  Int
+  owner     User     @relation("OwnerRentals", fields: [ownerId], references: [id])
+  ownerId   Int
+  startDate DateTime
+  endDate   DateTime
+  createdAt DateTime @default(now())
+}
+
+enum ProductStatus {
+  AVAILABLE
+  RENTED
+  SOLD
+}
