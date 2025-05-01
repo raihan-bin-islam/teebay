@@ -1,3 +1,5 @@
+import type { User } from '@/types/user'
+
 export type AuthFormData = {
   firstName: string
   lastName: string
@@ -5,4 +7,8 @@ export type AuthFormData = {
   phone: string
   email: string
   password: string
+}
+export type AuthPayload = {
+  token: string
+  user: User
 }

@@ -1,0 +1,14 @@
+enum ProductStatus {
+  AVAILABLE
+  RENTED
+  SOLD
+}
+
+enum CategoryName {
+  ELECTRONICS
+  FURNITURE
+  HOME_APPLIANCES
+  SPORTING_GOODS
+  OUTDOOR
+  TOYS
+}

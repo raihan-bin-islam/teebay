@@ -9,6 +9,14 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
       <CardHeader class="text-center text-2xl font-bold">SIGN IN</CardHeader>
       <CardContent>
         <LoginForm />
+        <div class="mt-4 mx-auto w-fit">
+          <span>
+            Do you have an account?
+            <RouterLink to="/register">
+              <a class="text-blue-500 hover:underline">Signup</a>
+            </RouterLink>
+          </span>
+        </div>
       </CardContent>
     </Card>
   </div>

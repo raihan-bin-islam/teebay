@@ -1,0 +1,23 @@
+input ProductCreateInput {
+  title: String!
+  description: String!
+  price: Float!
+  rentPrice: Float
+  rentPeriod: String
+  categoryIds: [Int!]!
+}
+
+input ProductUpdateInput {
+  title: String
+  description: String
+  price: Float
+  rentPrice: Float
+  rentPeriod: String
+  categoryIds: [Int!]
+}
+
+input RentalCreateInput {
+  productId: Int!
+  startDate: String!
+  endDate: String!
+}

@@ -2,7 +2,6 @@
 import { Button } from '@/components/ui/button'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-// import { vAutoAnimate } from '@formkit/auto-animate/vue'
 
 import { useForm } from 'vee-validate'
 import { registerSchema } from '@/lib/validation/authSchema'

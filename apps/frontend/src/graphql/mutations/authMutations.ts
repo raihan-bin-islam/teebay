@@ -1,4 +1,3 @@
-// src/graphql/mutations/authMutations.ts
 import gql from 'graphql-tag'
 
 export const LOGIN_MUTATION = gql`

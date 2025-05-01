@@ -2,8 +2,6 @@
 import { Button } from '@/components/ui/button'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { toast } from 'vue-sonner'
-// import { vAutoAnimate } from '@formkit/auto-animate/vue'
 import { useAuth } from '@/composables/useAuth'
 
 import { useForm } from 'vee-validate'
@@ -18,9 +16,8 @@ const { isFieldDirty, handleSubmit } = useForm({
   },
 })
 
-const onSubmit = handleSubmit((values) => {
-  handleLogin(values)
-  toast.success(JSON.stringify(values, null, 2))
+const onSubmit = handleSubmit(async (values) => {
+  await handleLogin(values)
 })
 </script>
 
@@ -39,11 +36,11 @@ const onSubmit = handleSubmit((values) => {
       <FormItem>
         <FormLabel>Password</FormLabel>
         <FormControl>
-          <Input type="text" placeholder="Enter your password" v-bind="field" />
+          <Input type="password" placeholder="Enter your password" v-bind="field" />
         </FormControl>
         <FormMessage />
       </FormItem>
     </FormField>
-    <Button type="submit"> Submit </Button>
+    <Button type="submit" class="cursor-pointer w-full"> Submit </Button>
   </form>
 </template>
