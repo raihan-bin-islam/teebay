@@ -2,6 +2,8 @@
 
 A full-stack application for buying, selling, and renting products. TeeBay provides a platform where users can list their products, buy products from others, or rent items for a specific period.
 
+Here is a loom recording demonstrating all its features: [click here](https://www.loom.com/share/00d1647c26a64b89951408532b308bd0?sid=768365ba-6692-425e-be22-d17ba66f1b05)
+
 ## Project Overview
 
 TeeBay is built using a modern tech stack with a Vue 3 frontend and a Node.js/Express/GraphQL backend. The application uses a PostgreSQL database for data storage and is structured as a monorepo using Turborepo for efficient build and development workflows.
