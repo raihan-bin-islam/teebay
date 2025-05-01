@@ -6,6 +6,59 @@ type User {
   phone: String
   email: String!
   password: String!
+  products: [Product!]
+  boughtProducts: [Transaction!] @deprecated(reason: "Use transactions instead")
+  soldProducts: [Transaction!] @deprecated(reason: "Use transactions instead")
+  rentedProducts: [Rental!] @deprecated(reason: "Use rentals instead")
+  lentProducts: [Rental!] @deprecated(reason: "Use rentals instead")
+  transactions: [Transaction!]
+  rentals: [Rental!]
+}
+
+type Category {
+  id: Int!
+  name: String!
+  products: [Product!]
+}
+
+type Product {
+  id: Int!
+  title: String!
+  description: String!
+  price: Float!
+  rentPrice: Float
+  rentPeriod: String
+  status: ProductStatus!
+  owner: User!
+  ownerId: Int!
+  categories: [Category]
+  transactions: [Transaction!]
+  rentals: [Rental!]
+  views: Int!
+}
+
+type Transaction {
+  id: Int!
+  product: Product!
+  productId: Int!
+  buyer: User!
+  buyerId: Int!
+  seller: User!
+  sellerId: Int!
+  createdAt: String!
+}
+
+type Rental {
+  id: Int!
+  product: Product!
+  productId: Int!
+  renter: User!
+  renterId: Int!
+  owner: User!
+  ownerId: Int!
+  startDate: String!
+  endDate: String!
+  createdAt: String!
 }
 
 type AuthPayload {

@@ -8,4 +8,9 @@ type Mutation {
     password: String!
   ): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
+  createProduct(data: ProductCreateInput!): Product!
+  updateProduct(id: Int!, data: ProductUpdateInput!): Product!
+  deleteProduct(id: Int!): Product!
+  buyProduct(productId: Int!): Transaction!
+  rentProduct(data: RentalCreateInput!): Rental!
 }

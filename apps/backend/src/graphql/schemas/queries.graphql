@@ -1,0 +1,16 @@
+type Query {
+  users: [User!]!
+  user(id: Int!): User
+  products: [Product!]!
+  product(id: Int!): Product
+  categories: [Category!]!
+  category(id: Int!): Category
+  myProducts: [Product!]!
+  myProduct(id: Int!): Product
+  myBoughtProducts: [Transaction!]!
+  mySoldProducts: [Transaction!]!
+  myBorrowedProducts: [Rental!]!
+  myLentProducts: [Rental!]!
+  rentals: [Rental!]!
+  transactions: [Transaction!]!
+}
