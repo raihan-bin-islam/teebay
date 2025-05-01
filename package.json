@@ -3,8 +3,7 @@
   "description": "A full stack application for buying/renting products",
   "private": true,
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "apps/*"
   ],
   "scripts": {
     "dev": "turbo run dev",
@@ -12,6 +11,7 @@
     "lint": "turbo run lint"
   },
   "devDependencies": {
+    "ts-node": "^10.9.2",
     "turbo": "^2.5.2"
   },
   "packageManager": "yarn@1.22.19"
