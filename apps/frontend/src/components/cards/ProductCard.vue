@@ -47,18 +47,21 @@ const {
         <h4 class="text-xl mb-1 font-semibold">
           {{ product.title }}
         </h4>
-        <p class="text-muted-foreground max-w-5xl">
+        <p class="text-muted-foreground max-w-5xl line-clamp-3">
           {{ product.description }}
         </p>
-        <div class="flex items-center gap-6 mt-4 text-lg">
-          <p>
-            Price: <span class="text-primary">${{ product.price }}</span>
-          </p>
-          <p class="capitalize">
-            Rent:
-            <span class="text-primary">${{ product.rentPrice }} </span>
-            Per {{ product.rentPeriod?.toLowerCase() }}
-          </p>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-6 mt-4 text-lg">
+            <p>
+              Price: <span class="text-primary">${{ product.price }}</span>
+            </p>
+            <p class="capitalize">
+              Rent:
+              <span class="text-primary">${{ product.rentPrice }} </span>
+              Per {{ product.rentPeriod?.toLowerCase() }}
+            </p>
+          </div>
+          <p>Views {{ product.views }}</p>
         </div>
       </div>
     </CardContent>

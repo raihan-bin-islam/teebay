@@ -10,6 +10,7 @@ export const GET_BOUGHT_PRODUCTS = gql`
         price
         rentPrice
         rentPeriod
+        views
         categories {
           id
           name
@@ -28,6 +29,7 @@ export const GET_SOLD_PRODUCTS = gql`
         price
         rentPrice
         rentPeriod
+        views
         categories {
           id
           name
@@ -46,6 +48,7 @@ export const GET_BORROWED_PRODUCTS = gql`
         price
         rentPrice
         rentPeriod
+        views
         categories {
           id
           name
@@ -64,6 +67,7 @@ export const GET_LENT_PRODUCTS = gql`
         price
         rentPrice
         rentPeriod
+        views
         categories {
           id
           name

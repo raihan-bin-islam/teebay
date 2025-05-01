@@ -33,6 +33,7 @@ export type Product = {
   categories: Category[]
   transactions: Transaction[]
   rentals: Rental[]
+  views?: number
 }
 
 // Transaction Type
